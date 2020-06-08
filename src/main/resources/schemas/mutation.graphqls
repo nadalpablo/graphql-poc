@@ -1,0 +1,6 @@
+type Mutation {
+    createFrequentFlyer(membershipId: String!, firstName: String!, lastName: String!, points: Int!) : FrequentFlyer!
+
+    createTrip(origin: String!, destination: String!, departureDate: LocalDateTime!, flightNumber: Int!,
+        airline: String!, frequentFlyerMembershipId: String!) : Trip!
+}

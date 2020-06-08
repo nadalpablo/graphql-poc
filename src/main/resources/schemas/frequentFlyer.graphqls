@@ -1,0 +1,8 @@
+type FrequentFlyer {
+    id: ID!
+    membershipId: String!
+    firstName: String!
+    lastName: String!
+    points: Int!
+    trips: [Trip]
+}

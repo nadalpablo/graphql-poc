@@ -1,0 +1,11 @@
+scalar LocalDateTime
+
+type Trip {
+    id: ID!
+    origin: String!
+    destination: String!
+    departureDate: LocalDateTime!
+    flightNumber: Int!
+    airline: String!
+    frequentFlyer: FrequentFlyer!
+}
