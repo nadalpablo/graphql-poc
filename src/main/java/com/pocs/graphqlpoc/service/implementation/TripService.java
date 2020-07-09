@@ -1,8 +1,8 @@
 package com.pocs.graphqlpoc.service.implementation;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -25,7 +25,7 @@ public class TripService implements TripServiceDefinition {
     }
 
     @Override
-    public List<Trip> getRecentTrips(int pageNumber, int pageSize) {
+    public Page<Trip> getRecentTrips(int pageNumber, int pageSize) {
         return tripRepository.findAllByDepartureDateBeforeOrderByDepartureDateDesc(LocalDateTime.now(),
             pageSize > 0 ? PageRequest.of(pageNumber, pageSize) : Pageable.unpaged());
     }

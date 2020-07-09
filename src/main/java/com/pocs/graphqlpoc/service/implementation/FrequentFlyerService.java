@@ -1,5 +1,8 @@
 package com.pocs.graphqlpoc.service.implementation;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.pocs.graphqlpoc.model.FrequentFlyer;
 import com.pocs.graphqlpoc.model.exception.EntityDoesNotExistException;
@@ -24,5 +27,10 @@ public class FrequentFlyerService implements FrequentFlyerServiceDefinition {
     @Override
     public FrequentFlyer getFrequentFlyer(String frequentFlyerId) {
         return frequentFlyerRepository.findById(frequentFlyerId).orElseThrow(() -> new EntityDoesNotExistException());
+    }
+
+    @Override
+    public Page<FrequentFlyer> getFrequentFlyers(int pageNumber, int pageSize) {
+        return frequentFlyerRepository.findAll(pageSize > 0 ? PageRequest.of(pageNumber, pageSize) : Pageable.unpaged());
     }
 }
