@@ -1,7 +1,7 @@
 type Query {
-    recentTrips(pageNumber: Int, pageSize: Int): [Trip]!
+    recentTrips(pageNumber: Int, pageSize: Int): [Trip]
 
-    frequentFlyers(pageNumber: Int, pageSize: Int): [FrequentFlyer]!
+    frequentFlyers(pageNumber: Int, pageSize: Int): [FrequentFlyer]
 
     frequentFlyer(membershipId: String): FrequentFlyer!
 }
