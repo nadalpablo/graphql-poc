@@ -16,6 +16,6 @@ public class TripResolver implements GraphQLResolver<Trip> {
     }
 
     public FrequentFlyer getFrequentFlyer(Trip trip) {
-        return frequentFlyerServiceDefinition.getFrequentFlyer(trip.getFrequentFlyerId());
+        return frequentFlyerServiceDefinition.getFrequentFlyerById(trip.getFrequentFlyerId());
     }
 }

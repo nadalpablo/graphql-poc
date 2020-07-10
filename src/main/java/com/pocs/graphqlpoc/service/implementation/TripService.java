@@ -8,20 +8,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import com.pocs.graphqlpoc.model.FrequentFlyer;
 import com.pocs.graphqlpoc.model.Trip;
-import com.pocs.graphqlpoc.model.exception.EntityDoesNotExistException;
-import com.pocs.graphqlpoc.repository.FrequentFlyerRepository;
 import com.pocs.graphqlpoc.repository.TripRepository;
+import com.pocs.graphqlpoc.service.definition.FrequentFlyerServiceDefinition;
 import com.pocs.graphqlpoc.service.definition.TripServiceDefinition;
 
 @Service
 public class TripService implements TripServiceDefinition {
 
     private TripRepository tripRepository;
-    private FrequentFlyerRepository frequentFlyerRepository;
+    private FrequentFlyerServiceDefinition frequentFlyerServiceDefinition;
 
-    public TripService(TripRepository tripRepository, FrequentFlyerRepository frequentFlyerRepository) {
+    public TripService(TripRepository tripRepository, FrequentFlyerServiceDefinition frequentFlyerServiceDefinition) {
         this.tripRepository = tripRepository;
-        this.frequentFlyerRepository = frequentFlyerRepository;
+        this.frequentFlyerServiceDefinition = frequentFlyerServiceDefinition;
     }
 
     @Override
@@ -33,14 +32,13 @@ public class TripService implements TripServiceDefinition {
     @Override
     public Trip createTrip(String origin, String destination, LocalDateTime departureDate, int flightNumber, String airline,
                            String frequentFlyerMembershipId) {
-        FrequentFlyer frequentFlyer = frequentFlyerRepository.findByMembershipId(frequentFlyerMembershipId)
-            .orElseThrow(() -> new EntityDoesNotExistException());
+        FrequentFlyer frequentFlyer = frequentFlyerServiceDefinition.getFrequentFlyerByMembershipId(frequentFlyerMembershipId);
 
         Trip trip = new Trip(origin, destination, departureDate, flightNumber, airline, frequentFlyer.getId());
         trip = tripRepository.save(trip);
 
         frequentFlyer.addTrip(trip);
-        frequentFlyerRepository.save(frequentFlyer);
+        frequentFlyerServiceDefinition.updateFrequentFlyer(frequentFlyer);
 
         return trip;
     }

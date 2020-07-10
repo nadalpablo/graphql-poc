@@ -25,8 +25,20 @@ public class FrequentFlyerService implements FrequentFlyerServiceDefinition {
     }
 
     @Override
-    public FrequentFlyer getFrequentFlyer(String frequentFlyerId) {
-        return frequentFlyerRepository.findById(frequentFlyerId).orElseThrow(() -> new EntityDoesNotExistException());
+    public FrequentFlyer updateFrequentFlyer(FrequentFlyer frequentFlyer) {
+        return frequentFlyerRepository.save(frequentFlyer);
+    }
+
+    @Override
+    public FrequentFlyer getFrequentFlyerById(String frequentFlyerId) {
+        return frequentFlyerRepository.findById(frequentFlyerId)
+            .orElseThrow(() -> new EntityDoesNotExistException());
+    }
+
+    @Override
+    public FrequentFlyer getFrequentFlyerByMembershipId(String frequentFlyerMembershipId) {
+        return frequentFlyerRepository.findByMembershipId(frequentFlyerMembershipId)
+            .orElseThrow(() -> new EntityDoesNotExistException());
     }
 
     @Override

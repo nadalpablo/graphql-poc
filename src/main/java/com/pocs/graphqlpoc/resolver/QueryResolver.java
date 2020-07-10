@@ -24,6 +24,10 @@ public class QueryResolver implements GraphQLQueryResolver {
         return frequentFlyerServiceDefinition.getFrequentFlyers(pageNumber, pageSize);
     }
 
+    public FrequentFlyer getFrequentFlyer(String membershipId) {
+        return frequentFlyerServiceDefinition.getFrequentFlyerByMembershipId(membershipId);
+    }
+
     public Page<Trip> getRecentTrips(int pageNumber, int pageSize) {
         return tripServiceDefinition.getRecentTrips(pageNumber, pageSize);
     }
