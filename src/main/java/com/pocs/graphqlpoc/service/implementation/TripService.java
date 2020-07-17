@@ -1,6 +1,8 @@
 package com.pocs.graphqlpoc.service.implementation;
 
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -32,14 +34,15 @@ public class TripService implements TripServiceDefinition {
     @Override
     public Trip createTrip(String origin, String destination, LocalDateTime departureDate, int flightNumber, String airline,
                            String frequentFlyerMembershipId) {
-        FrequentFlyer frequentFlyer = frequentFlyerServiceDefinition.getFrequentFlyerByMembershipId(frequentFlyerMembershipId);
+        return Optional.ofNullable(frequentFlyerServiceDefinition.getFrequentFlyerByMembershipId(frequentFlyerMembershipId))
+            .map(FrequentFlyer::getId)
+            .map(frequentFlyerId -> new Trip(origin, destination, departureDate, flightNumber, airline, frequentFlyerId))
+            .map(tripRepository::save)
+            .orElse(null);
+    }
 
-        Trip trip = new Trip(origin, destination, departureDate, flightNumber, airline, frequentFlyer.getId());
-        trip = tripRepository.save(trip);
-
-        frequentFlyer.addTrip(trip);
-        frequentFlyerServiceDefinition.updateFrequentFlyer(frequentFlyer);
-
-        return trip;
+    @Override
+    public List<Trip> getTripsByFrequentFlyerId(String frequentFlyerId) {
+        return tripRepository.findAllByFrequentFlyerId(frequentFlyerId);
     }
 }

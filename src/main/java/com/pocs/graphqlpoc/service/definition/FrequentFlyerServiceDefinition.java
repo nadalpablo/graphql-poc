@@ -7,8 +7,6 @@ public interface FrequentFlyerServiceDefinition {
 
     FrequentFlyer createFrequentFlyer(String membershipId, String firstName, String lastName, int points);
 
-    FrequentFlyer updateFrequentFlyer(FrequentFlyer frequentFlyer);
-
     FrequentFlyer getFrequentFlyerById(String frequentFlyerId);
 
     FrequentFlyer getFrequentFlyerByMembershipId(String frequentFlyerMembershipId);

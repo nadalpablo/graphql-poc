@@ -1,12 +1,8 @@
 package com.pocs.graphqlpoc.model;
 
-import java.util.List;
-import java.util.Objects;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.Indexed;
 import org.springframework.data.mongodb.core.mapping.Document;
-import com.google.common.collect.Lists;
 
 @Document(collection = "frequentFlyers")
 public class FrequentFlyer {
@@ -20,7 +16,6 @@ public class FrequentFlyer {
     private String firstName;
     private String lastName;
     private int points;
-    private List<Trip> trips;
 
     public FrequentFlyer() {
         // No-arg constructor
@@ -73,22 +68,6 @@ public class FrequentFlyer {
         this.points = points;
     }
 
-    public List<Trip> getTrips() {
-        return trips;
-    }
-
-    public void setTrips(List<Trip> trips) {
-        this.trips = trips;
-    }
-
-    public void addTrip(Trip trip) {
-        if (Objects.isNull(this.trips)) {
-            this.trips = Lists.newArrayList();
-        }
-
-        this.trips.add(trip);
-    }
-
     @Override
     public String toString() {
         return "{\"FrequentFlyer\":{"
@@ -97,7 +76,6 @@ public class FrequentFlyer {
             + ", \"firstName\":\"" + firstName + "\""
             + ", \"lastName\":\"" + lastName + "\""
             + ", \"points\":\"" + points + "\""
-            + ", \"trips\":" + trips
             + "}}";
     }
 }

@@ -15,11 +15,11 @@ repositories {
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
-    implementation 'com.zhokhov.graphql:graphql-datetime-spring-boot-starter:1.9.0'
+    implementation 'com.zhokhov.graphql:graphql-datetime-spring-boot-starter:2.0.0'
 
-    compile group: 'com.graphql-java-kickstart', name: 'graphql-java-tools', version: '6.0.2'
-    compile group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter', version: '7.0.1'
-    compile group: 'com.graphql-java-kickstart', name: 'graphiql-spring-boot-starter', version: '7.0.1'
+    compile group: 'com.graphql-java-kickstart', name: 'graphql-java-tools', version: '6.1.0'
+    compile group: 'com.graphql-java-kickstart', name: 'graphql-spring-boot-starter', version: '7.1.0'
+    compile group: 'com.graphql-java-kickstart', name: 'graphiql-spring-boot-starter', version: '7.1.0'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb'
     compile group: 'com.google.guava', name: 'guava', version: '29.0-jre'
 
